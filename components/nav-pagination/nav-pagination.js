@@ -2,7 +2,7 @@ const prevButton = document.querySelector('[data-js="button-prev"]');
 const nextButton = document.querySelector('[data-js="button-next"]');
 const pagination = document.querySelector('[data-js="pagination"]');
 
-export function updatePegination(pageIndex, maxPageIndex, onPageChanged) {
+export function updatePagination(pageIndex, maxPageIndex, onPageChanged) {
   if (pageIndex < 0) return;
   if (pageIndex > maxPageIndex) return;
 
