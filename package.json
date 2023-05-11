@@ -1,5 +1,6 @@
 {
   "name": "recap-project-3_rick-and-morty-app",
+  "type": "module",
   "version": "0.0.0-unreleased",
   "description": "",
   "main": "index.html",
