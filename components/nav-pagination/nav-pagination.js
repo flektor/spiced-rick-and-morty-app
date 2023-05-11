@@ -3,10 +3,10 @@ const nextButton = document.querySelector('[data-js="button-next"]');
 const pagination = document.querySelector('[data-js="pagination"]');
 
 export function updatePagination(pageIndex, maxPageIndex, onPageChanged) {
-  if (pageIndex < 0) return;
+  if (pageIndex < 1) return;
   if (pageIndex > maxPageIndex) return;
 
   pagination.innerHTML = `${pageIndex} / ${maxPageIndex}`;
-  prevButton.onclick = () => onPageChanged(pageIndex - 1);
-  nextButton.onclick = () => onPageChanged(pageIndex + 1);
+  prevButton.onclick = () => onPageChanged(-1);
+  nextButton.onclick = () => onPageChanged(1);
 }
