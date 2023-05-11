@@ -21,9 +21,9 @@ showPage(1).then(() => {
   updatePegination(state.pageIndex, state.maxPageIndex, onPageChanged);
 });
 
-async function showPage(pageIndex, maxPageIndex) {
+async function showPage(pageIndex) {
   if (pageIndex < 0) return;
-  if (pageIndex > maxPageIndex) return;
+  if (pageIndex > state.maxPageIndex) return;
 
   const data = await fetchCharacterData(pageIndex);
   state.maxPageIndex = data.info.pages;
