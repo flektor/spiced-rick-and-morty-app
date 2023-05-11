@@ -1,6 +1,6 @@
 import { createCharacterCard } from "./components/card/card.js";
 import { fetchCharacterData } from "./components/utils/fetch-data.js";
-import { updatePegination } from "./components/nav-pagination/nav-pagination.js";
+import { updatePagination } from "./components/nav-pagination/nav-pagination.js";
 
 const cardContainer = document.querySelector('[data-js="card-container"]');
 const searchBarContainer = document.querySelector(
@@ -18,19 +18,19 @@ const state = {
 const onPageChanged = (pageIndex) => showPage(pageIndex);
 
 showPage(1).then(() => {
-  updatePegination(state.pageIndex, state.maxPageIndex, onPageChanged);
+  updatePagination(state.pageIndex, state.maxPageIndex, onPageChanged);
 });
 
-async function showPage(pageIndex, maxPageIndex) {
+async function showPage(pageIndex) {
   if (pageIndex < 0) return;
-  if (pageIndex > maxPageIndex) return;
+  if (pageIndex > state.maxPageIndex) return;
 
   const data = await fetchCharacterData(pageIndex);
   state.maxPageIndex = data.info.pages;
   state.pageIndex = pageIndex;
 
   updateCardContainer(data.results);
-  updatePegination(pageIndex, state.maxPageIndex, onPageChanged);
+  updatePagination(pageIndex, state.maxPageIndex, onPageChanged);
   return data;
 }
 
