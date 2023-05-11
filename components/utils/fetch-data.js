@@ -1,6 +1,5 @@
-export async function fetchCharacterData(pageIndex) {
+export async function fetchCharacterData(url) {
   try {
-    const url = `https://rickandmortyapi.com/api/character/?page=${pageIndex}`;
     const response = await fetch(url);
     const dataApi = await response.json();
     return dataApi;
