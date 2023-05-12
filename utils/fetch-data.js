@@ -1,12 +1,19 @@
-export function nameQueryUrl(name = "") {
-  return `https://rickandmortyapi.com/api/character/?name=${name}`;
-}
+export const baseUrl = "https://rickandmortyapi.com/api/character/";
 
-export async function fetchCharacterData(url) {
+export async function fetchCharacter(query) {
   try {
-    const response = await fetch(url);
-    return await response.json();
+    const response = await fetch(query);
+    const object = await response.json();
+    if (object.error) {
+      throw object.error;
+    }
+    return object;
   } catch (error) {
-    console.error(error);
+    return {
+      info: {
+        pages: 0,
+      },
+      results: [],
+    };
   }
 }

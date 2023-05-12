@@ -1,4 +1,4 @@
-import { fetchCharacterData } from "../../utils/fetch-data.js";
+import { fetchCharacter } from "../../utils/fetch-data.js";
 
 const prevButton = document.querySelector('[data-js="button-prev"]');
 const nextButton = document.querySelector('[data-js="button-next"]');
@@ -7,9 +7,10 @@ const pagination = document.querySelector('[data-js="pagination"]');
 export async function createPagination(queryUrl, onPageChanged) {
   //
   async function updatePage(queryUrl, pageIndex = 1) {
-    state.data = await fetchCharacterData(queryUrl);
-    state.pageIndex = pageIndex;
-    pagination.innerHTML = `${state.pageIndex} / ${state.data.info.pages}`;
+    state.data = await fetchCharacter(queryUrl);
+    const pages = state.data.info.pages;
+    state.pageIndex = pages === 0 ? 0 : pageIndex;
+    pagination.innerHTML = `${state.pageIndex} / ${pages}`;
     onPageChanged(state);
     return state;
   }

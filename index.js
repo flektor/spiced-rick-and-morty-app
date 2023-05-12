@@ -1,26 +1,22 @@
 // prettier-ignore
-import { nameQueryUrl } from "./utils/fetch-data.js";
 import { createCharacterCard } from "./components/card/card.js";
 import { createPagination } from "./components/nav-pagination/nav-pagination.js";
+import { onSearch } from "./components/search-bar/search-bar.js";
+import { baseUrl } from "./utils/fetch-data.js";
 
 const cardContainer = document.querySelector('[data-js="card-container"]');
-const searchBar = document.querySelector('[data-js="search-bar"]');
 
 const state = {
   pageIndex: 0,
   data: null,
 };
 
-createPagination(nameQueryUrl(), onPageChanged);
-
-searchBar.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const form = event.target;
-  const formData = new FormData(form);
-  const search = Object.fromEntries(formData);
-  const url = nameQueryUrl(search.query);
+onSearch((query) => {
+  const url = baseUrl + query;
   createPagination(url, onPageChanged);
 });
+
+createPagination(baseUrl, onPageChanged);
 
 function onPageChanged(newState) {
   state.pageIndex = newState.pageIndex;
